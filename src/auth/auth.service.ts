@@ -39,7 +39,7 @@ export class AuthService {
 
         await this.createRefreshToken({ jti, userId: sub })
 
-        return { user, accessToken, refreshToken };
+        return { user: { id: sub, name, email }, accessToken, refreshToken };
     }
 
     async login(email: string, password: string) {
@@ -60,7 +60,10 @@ export class AuthService {
 
         await this.createRefreshToken({ jti, userId: sub })
 
-        return { user, accessToken, refreshToken };
+        const { name } = user
+
+
+        return { user: { id: sub, name, email }, accessToken, refreshToken };
     }
 
     async refresh(refreshToken: string | undefined) {

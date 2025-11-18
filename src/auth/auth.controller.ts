@@ -19,7 +19,6 @@ export class AuthController {
     @Post('register')
     async register(@Body() dto: RegisterDto, @Res() res: Response) {
         const { user, accessToken, refreshToken } = await this.auth.register(dto);
-        const { id: userId, email, name } = user
 
         res.cookie(this.cookieName, refreshToken, {
             httpOnly: true,
@@ -29,13 +28,12 @@ export class AuthController {
             path: '/auth/refresh',
         });
 
-        return res.json({ accessToken, user: { userId, email, name } });
+        return res.json({ accessToken, user });
     }
 
     @Post('login')
     async login(@Body() dto: LoginDto, @Res() res: Response) {
         const { user, accessToken, refreshToken } = await this.auth.login(dto.email, dto.password);
-        const { id, email, name } = user
 
         res.cookie(this.cookieName, refreshToken, {
             httpOnly: true,
@@ -45,7 +43,7 @@ export class AuthController {
             path: '/auth/refresh',
         });
 
-        return res.json({ accessToken, user: { id, email, name } });
+        return res.json({ accessToken, user });
     }
 
     @UseGuards(MainGuard)

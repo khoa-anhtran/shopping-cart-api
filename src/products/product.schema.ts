@@ -10,7 +10,7 @@ export class Product {
     title!: string;
 
     @Prop({ required: true, ref: ProductCategory.name, index: true, type: MSchema.Types.ObjectId })
-    categoryId!: Types.ObjectId;
+    categoryId!: Types.ObjectId | ProductCategory;
 
     @Prop({ required: true })
     price!: number;
