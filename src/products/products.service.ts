@@ -12,7 +12,9 @@ export class ProductsService {
     }
 
     findAll() {
-        return this.model.find().lean()
+        return this.model.find()
+            .populate({ path: 'categoryId', select: 'name' })
+            .lean();
     }
 
 }

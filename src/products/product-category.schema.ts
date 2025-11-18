@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
-@Schema({})
+@Schema({ collection: "productCategories" })
 export class ProductCategory {
 
     @Prop({ required: true, unique: true, lowercase: true, trim: true, index: true })

@@ -127,8 +127,8 @@ export class AuthService {
         if (!user)
             throw new Error("No User existed")
 
-        const { id, email, name } = user
+        const { email, name } = user
 
-        return { id, email, name }
+        return { id: userId, email, name }
     }
 }

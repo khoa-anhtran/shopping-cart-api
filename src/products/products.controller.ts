@@ -3,9 +3,7 @@ import { ProductsService } from "./products.service";
 
 @Controller('api/products')
 export class ProductsController {
-    constructor(private service: ProductsService) {
-
-    }
+    constructor(private service: ProductsService) { }
 
     @Get('')
     async getProducts() {

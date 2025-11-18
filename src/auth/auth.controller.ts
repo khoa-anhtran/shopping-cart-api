@@ -59,9 +59,9 @@ export class AuthController {
     async refresh(@Req() req: Request) {
         const refreshToken = req.cookies?.refresh_token
 
-        const { accessToken, user } = await this.auth.refresh(refreshToken)
+        const data = await this.auth.refresh(refreshToken)
 
-        return { user, accessToken };
+        return data;
     }
 
     @UseGuards(MainGuard)
