@@ -84,8 +84,9 @@ export class AuthService {
         }
 
         const accessToken = await this.signAccessToken(userId, email)
+        const user = await this.getUserInfo(userId)
 
-        return { user: { userId, email }, accessToken };
+        return { user, accessToken };
     }
 
     async signRefreshToken(sub: string, email: string) {
@@ -118,5 +119,16 @@ export class AuthService {
 
     async revokeRefreshToken(jti: string) {
         // e.g. await this.refreshTokensRepo.update({ jti }, { revoked: true });
+    }
+
+    async getUserInfo(userId: string) {
+        const user = await this.users.findById(userId)
+
+        if (!user)
+            throw new Error("No User existed")
+
+        const { id, email, name } = user
+
+        return { id, email, name }
     }
 }

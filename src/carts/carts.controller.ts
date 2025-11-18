@@ -3,8 +3,7 @@ import { CartsService } from './carts.service';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 import { Types } from 'mongoose';
-import { CartItemDto } from './dto/cart-item.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { MainGuard } from 'src/auth-strategy/main.guard';
 
 @Controller('/api/carts')
 export class CartsController {
@@ -21,7 +20,7 @@ export class CartsController {
     return data
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(MainGuard)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const userId = new Types.ObjectId(id)

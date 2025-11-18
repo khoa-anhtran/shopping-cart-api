@@ -3,7 +3,8 @@ import type { Response, Request } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { AuthService } from './auth.service';
 import { RegisterDto, LoginDto } from './dto';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import { JwtAuthGuard } from '../auth-strategy/jwt-auth.guard';
+import { MainGuard } from '../auth-strategy/main.guard';
 
 @Controller('/auth')
 export class AuthController {
@@ -25,15 +26,16 @@ export class AuthController {
             sameSite: 'lax',
             secure: this.isProd,
             maxAge: 1000 * 60 * 60 * 24 * 30,
+            path: '/auth/refresh',
         });
 
-        return res.status(201).json({ user: { userId, email, name }, accessToken });
+        return res.json({ accessToken, user: { userId, email, name } });
     }
 
     @Post('login')
     async login(@Body() dto: LoginDto, @Res() res: Response) {
         const { user, accessToken, refreshToken } = await this.auth.login(dto.email, dto.password);
-        const { id: userId, email, name } = user
+        const { id, email, name } = user
 
         res.cookie(this.cookieName, refreshToken, {
             httpOnly: true,
@@ -43,17 +45,17 @@ export class AuthController {
             path: '/auth/refresh',
         });
 
-        return res.json({ accessToken, user: { userId, email, name } });
+        return res.json({ accessToken, user: { id, email, name } });
     }
 
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(MainGuard)
     @Get('me')
     async me(@Req() req: Request) {
         const user = (req as any).user as { userId: string; email: string };
         return { user };
     }
 
-    @Get('refresh')
+    @Post('refresh')
     async refresh(@Req() req: Request) {
         const refreshToken = req.cookies?.refresh_token
 
@@ -62,7 +64,7 @@ export class AuthController {
         return { user, accessToken };
     }
 
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(MainGuard)
     @Post('logout')
     async logout(@Res() res: Response) {
         res.clearCookie(this.cookieName, { httpOnly: true, sameSite: 'lax', secure: this.isProd, path: "/auth/refresh" });

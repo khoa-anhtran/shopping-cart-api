@@ -3,26 +3,19 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigService, ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from '../users/users.module';
-import { AuthService } from './auth.service';
-import { AuthController } from './auth.controller';
 import { JwtStrategy } from '../auth-strategy/jwt.strategy';
 import { AccountsModule } from 'src/accounts/accounts.module';
 import { CartsModule } from 'src/carts/carts.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { RefreshToken, RefreshTokenSchema } from './refresh-token.schema';
 import { AzureAdStrategy } from '../auth-strategy/azure-ad.strategy';
 import { JwtAuthGuard } from '../auth-strategy/jwt-auth.guard';
 import { AzureAdGuard } from '../auth-strategy/azure-ad.guard';
 import { MainGuard } from '../auth-strategy/main.guard';
-import { AuthStrategyModule } from 'src/auth-strategy/auth-stategy.module';
 
 @Module({
     imports: [
         ConfigModule,
-        UsersModule,
-        AccountsModule,
-        CartsModule,
-        AuthStrategyModule,
+        PassportModule.register({ defaultStrategy: 'jwt' }),
         JwtModule.registerAsync({
             inject: [ConfigService],
             useFactory: (cfg: ConfigService) => ({
@@ -30,9 +23,8 @@ import { AuthStrategyModule } from 'src/auth-strategy/auth-stategy.module';
                 signOptions: { expiresIn: '15m' },
             }),
         }),
-        MongooseModule.forFeature([{ name: RefreshToken.name, schema: RefreshTokenSchema }])
     ],
-    providers: [AuthService],
-    controllers: [AuthController],
+    providers: [JwtStrategy, AzureAdStrategy, JwtAuthGuard, AzureAdGuard, MainGuard],
+    exports: [JwtAuthGuard, AzureAdGuard, MainGuard],
 })
-export class AuthModule { }
+export class AuthStrategyModule { }
