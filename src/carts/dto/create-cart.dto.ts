@@ -1,5 +1,6 @@
-import { Types } from "mongoose";
+import { IsMongoId } from "class-validator";
 
 export class CreateCartDto {
-    userId: Types.ObjectId
+    @IsMongoId()
+    userId: string
 }

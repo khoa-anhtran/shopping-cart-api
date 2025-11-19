@@ -9,5 +9,6 @@ export class CartItemDto {
     quantity!: number;
 
     @IsNotEmpty()
+    
     addedAt!: string;
 }

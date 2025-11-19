@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Schema as MSchema } from 'mongoose';
 import { Types } from "mongoose";
-import { Product } from "src/products/product.schema";
+import { Product } from "src/products/schemas/product.schema";
 
 @Schema({ _id: false })
 export class CartItem {
