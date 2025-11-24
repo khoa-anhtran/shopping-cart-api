@@ -1,8 +1,6 @@
 import { IsMongoId, IsNumber, IsOptional, Max, Min, ValidateNested } from "class-validator";
 
 export class CreateCommentDto {
-    @IsMongoId()
-    productId: string
 
     @IsOptional()
     text?: string

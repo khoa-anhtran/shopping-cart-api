@@ -7,10 +7,10 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 export class CommentsController {
   constructor(private readonly commentsService: CommentsService) { }
 
-  @Post()
-  create(@Body() createCommentDto: CreateCommentDto) {
+  @Post(':product_id')
+  create(@Param('product_id') productId: string, @Body() createCommentDto: CreateCommentDto) {
     const userId = "69158f84ead3d05ff2a113a3"
-    return this.commentsService.create(createCommentDto, userId);
+    return this.commentsService.create(createCommentDto, userId, productId);
   }
 
   @Get(':product_id')
