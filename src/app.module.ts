@@ -7,6 +7,7 @@ import { ProductModule } from './products/products.module';
 import { AccountsModule } from './accounts/accounts.module';
 import { CartsModule } from './carts/carts.module';
 import { CommentsModule } from './comments/comments.module';
+import { UploadModule } from './cloudinary/upload.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { CommentsModule } from './comments/comments.module';
     ProductModule,
     AccountsModule,
     CartsModule,
-    CommentsModule
+    CommentsModule,
+    UploadModule
   ],
 })
 
