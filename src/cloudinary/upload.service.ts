@@ -1,7 +1,6 @@
 // upload.service.ts
 import { Injectable } from "@nestjs/common";
 import cloudinary from "./cloudinary.config";
-import { v4 as uuid } from "uuid";
 
 @Injectable()
 export class UploadService {

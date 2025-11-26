@@ -1,9 +1,13 @@
-import { IsMongoId, IsNumber, IsOptional, Max, Min, ValidateNested } from "class-validator";
+import { IsArray, IsMongoId, IsNumber, IsOptional, Max, Min, ValidateNested } from "class-validator";
 
 export class CreateCommentDto {
 
     @IsOptional()
     text?: string
+
+    @IsOptional()
+    @IsArray()
+    images?: { publicId: string; url: string }[]
 
     @IsMongoId()
     @IsOptional()
