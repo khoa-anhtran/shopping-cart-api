@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { RegisterDto, LoginDto } from './dto';
 import { JwtAuthGuard } from '../auth-strategy/jwt-auth.guard';
 import { MainGuard } from '../auth-strategy/main.guard';
+import type { MyRequest } from 'src/types/server';
 
 @Controller('/auth')
 export class AuthController {
@@ -48,8 +49,8 @@ export class AuthController {
 
     @UseGuards(MainGuard)
     @Get('me')
-    async me(@Req() req: Request) {
-        const user = (req as any).user as { userId: string; email: string };
+    async me(@Req() req: MyRequest) {
+        const user = req.user as { userId: string; email: string; };
         return { user };
     }
 

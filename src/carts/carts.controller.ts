@@ -39,6 +39,7 @@ export class CartsController {
     return res
   }
 
+  @UseGuards(MainGuard)
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateCartDto: UpdateCartDto) {
     const userId = new Types.ObjectId(id)

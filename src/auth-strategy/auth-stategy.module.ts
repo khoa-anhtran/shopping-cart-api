@@ -23,6 +23,7 @@ import { MainGuard } from '../auth-strategy/main.guard';
                 signOptions: { expiresIn: '15m' },
             }),
         }),
+        UsersModule
     ],
     providers: [JwtStrategy, AzureAdStrategy, JwtAuthGuard, AzureAdGuard, MainGuard],
     exports: [JwtAuthGuard, AzureAdGuard, MainGuard],

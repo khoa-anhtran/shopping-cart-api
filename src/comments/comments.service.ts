@@ -14,14 +14,14 @@ export class CommentsService {
     const createdComment = await this.model.create({ ...createCommentDto, user: userId, productId })
 
     const comment = await createdComment
-      .populate({ path: 'user', select: 'name' })
+      .populate({ path: 'user', select: 'name avatar' })
 
     return {
       id: comment._id,
       text: comment.text,
       images: comment.images,
       depth: comment.depth,
-      user: { name: (comment.user as User).name, id: comment.user._id, },
+      user: comment.user,
       parentId: comment.parentId,
       createdAt: comment.createdAt,
       updatedAt: comment.updatedAt,
@@ -32,7 +32,7 @@ export class CommentsService {
   async findAll(productId: string) {
     const docs = await this.model
       .find({ productId })
-      .populate({ path: 'user', select: 'name' })
+      .populate({ path: 'user', select: 'name avatar' })
       .populate({
         path: 'replies',
         select: 'id'
@@ -45,7 +45,7 @@ export class CommentsService {
         text: doc.text,
         images: doc.images,
         depth: doc.depth,
-        user: { name: (doc.user as User).name, id: doc.user._id, },
+        user: doc.user,
         createdAt: doc.createdAt,
         updatedAt: doc.updatedAt,
         parentId: doc.parentId,
