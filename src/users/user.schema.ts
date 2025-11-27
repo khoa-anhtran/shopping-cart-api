@@ -11,6 +11,9 @@ export class User {
   @Prop({ required: true, trim: true })
   name!: string;
 
+  @Prop({ trim: true })
+  avatar?: string
+
   @Prop({ required: true })
   provider!: AccountProvider;
 }

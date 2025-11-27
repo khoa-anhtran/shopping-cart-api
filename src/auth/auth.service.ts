@@ -62,7 +62,6 @@ export class AuthService {
 
         const { name } = user
 
-
         return { user: { id: sub, name, email }, accessToken, refreshToken };
     }
 
@@ -130,8 +129,8 @@ export class AuthService {
         if (!user)
             throw new Error("No User existed")
 
-        const { email, name } = user
+        const { email, name, avatar } = user
 
-        return { id: userId, email, name }
+        return { id: userId, email, name, avatar }
     }
 }
