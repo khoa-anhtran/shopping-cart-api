@@ -15,7 +15,7 @@ export class AccountsService {
         return this.model.findOne({ userId }).lean().exec();
     }
 
-    create(data: { id: string, email: string; passwordHash: string }) {
+    create(data: { _id: string, email: string; passwordHash: string }) {
         return this.model.create(data);
     }
 }

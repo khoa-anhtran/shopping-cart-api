@@ -30,7 +30,7 @@ export class AuthService {
         const salt = await bcrypt.genSalt(10);
         const passwordHash = await bcrypt.hash(password, salt);
         const user = await this.users.create({ email, name, provider: AccountProvider.MANUAL });
-        await this.accounts.create({ id: user._id, email: data.email, passwordHash });
+        await this.accounts.create({ _id: user._id, email: data.email, passwordHash });
         await this.carts.create({ userId: user._id })
 
         const sub = user.id
@@ -80,7 +80,7 @@ export class AuthService {
         return {
             accessToken,
             refreshToken,
-            user: { email: user.email, userId: user.id, name: user.name, avatar: user.avatar }
+            user: { email: user.email, id: user.id, name: user.name, avatar: user.avatar }
         }
     }
 
