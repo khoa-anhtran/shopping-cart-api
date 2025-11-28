@@ -8,15 +8,15 @@ import { UpdateUserDto } from 'src/comments/dto/update-user.dto';
 export class UsersService {
   constructor(@InjectModel(User.name) private readonly model: Model<UserDocument>) { }
 
-  findByEmail(email: string) {
-    return this.model.findOne({ email }).exec();
+  findByEmail(email: string, provider: AccountProvider = AccountProvider.MANUAL) {
+    return this.model.findOne({ email, provider }).exec();
   }
 
   findById(id: Types.ObjectId | string) {
     return this.model.findOne({ _id: id }).lean().exec();
   }
 
-  create(data: { email: string; name: string; provider: AccountProvider }) {
+  create(data: { email: string; name: string; provider: AccountProvider; providerId?: string, avatar?: string }) {
     return this.model.create(data);
   }
 

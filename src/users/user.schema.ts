@@ -16,11 +16,15 @@ export class User {
 
   @Prop({ required: true })
   provider!: AccountProvider;
+
+  @Prop({ trim: true })
+  providerId?: string;
 }
 
 export enum AccountProvider {
   MANUAL = 'MANUAL',
   MICROSOFT = 'MICROSOFT',
+  GOOGLE = 'GOOGLE',
 }
 
 export type UserDocument = HydratedDocument<User>;

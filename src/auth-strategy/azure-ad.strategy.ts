@@ -40,7 +40,7 @@ export class AzureAdStrategy extends PassportStrategy(BearerStrategy, 'oauth-bea
             token.email ??
             token.preferred_username;
 
-        const user = await this.usersService.findByEmail(email)
+        const user = await this.usersService.findByEmail(email, AccountProvider.MICROSOFT)
 
         let userId: string
 

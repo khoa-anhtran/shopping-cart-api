@@ -10,6 +10,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { RefreshToken, RefreshTokenDocument } from './refresh-token.schema';
 import { Model } from 'mongoose';
 import { JwtPayload, JwtRTPayload } from 'src/types/auth';
+import { ReqUserPayload } from 'src/types/server';
 
 @Injectable()
 export class AuthService {
@@ -63,6 +64,24 @@ export class AuthService {
         const { name } = user
 
         return { user: { id: sub, name, email }, accessToken, refreshToken };
+    }
+
+    async googleLogin(email: string, name: string, providerId: string, avatar?: string) {
+        let user
+        user = await this.users.findByEmail(email, AccountProvider.GOOGLE)
+
+        if (!user) {
+            user = await this.users.create({ email, name, avatar, provider: AccountProvider.GOOGLE, providerId })
+        }
+
+        const accessToken = await this.signAccessToken(user.id, email)
+        const { refreshToken } = await this.signRefreshToken(user.id, email)
+
+        return {
+            accessToken,
+            refreshToken,
+            user: { email: user.email, userId: user.id, name: user.name, avatar: user.avatar }
+        }
     }
 
     async refresh(refreshToken: string | undefined) {
