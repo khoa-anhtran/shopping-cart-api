@@ -3,7 +3,6 @@ import type { Response, Request } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { AuthService } from './auth.service';
 import { RegisterDto, LoginDto } from './dto';
-import { JwtAuthGuard } from '../auth-strategy/jwt-auth.guard';
 import { MainGuard } from '../auth-strategy/main.guard';
 import type { MyRequest } from 'src/types/server';
 import { OAuth2Client, TokenPayload } from 'google-auth-library';
