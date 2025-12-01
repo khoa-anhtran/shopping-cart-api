@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { BearerStrategy } from 'passport-azure-ad';
-import { ReqUserPayload } from 'src/types/server';
+import { ReqUserPayload } from 'src/type';
 import { AccountProvider } from 'src/users/user.schema';
 import { UsersService } from 'src/users/users.service';
 

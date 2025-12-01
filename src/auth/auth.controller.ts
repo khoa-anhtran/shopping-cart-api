@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { AuthService } from './auth.service';
 import { RegisterDto, LoginDto } from './dto';
 import { MainGuard } from '../auth-strategy/main.guard';
-import type { MyRequest } from 'src/types/server';
+import type { MyRequest } from 'src/type';
 import { OAuth2Client, TokenPayload } from 'google-auth-library';
 
 @Controller('/auth')

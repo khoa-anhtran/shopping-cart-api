@@ -9,8 +9,8 @@ import { nanoid } from 'nanoid';
 import { InjectModel } from '@nestjs/mongoose';
 import { RefreshToken, RefreshTokenDocument } from './refresh-token.schema';
 import { Model } from 'mongoose';
-import { JwtPayload, JwtRTPayload } from 'src/types/auth';
-import { ReqUserPayload } from 'src/types/server';
+import { JwtPayload, JwtRTPayload } from 'src/auth/type';
+import { ReqUserPayload } from 'src/type';
 
 @Injectable()
 export class AuthService {

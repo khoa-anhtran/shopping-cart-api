@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { Request } from 'express';
 import { ConfigService } from '@nestjs/config';
-import { JwtPayload } from 'src/types/auth';
+import { JwtPayload } from 'src/auth/type';
 
 function cookieExtractor(req: Request): string | null {
     const name = process.env.COOKIE_NAME || 'access_token';
