@@ -31,8 +31,8 @@ export class AuthController {
 
         res.cookie(this.cookieName, refreshToken, {
             httpOnly: true,
-            sameSite: 'lax',
-            secure: this.isProd,
+            sameSite: 'none',
+            secure: true,
             maxAge: 1000 * 60 * 60 * 24 * 30,
             path: '/auth/refresh',
         });
@@ -46,8 +46,8 @@ export class AuthController {
 
         res.cookie(this.cookieName, refreshToken, {
             httpOnly: true,
-            sameSite: 'lax',
-            secure: this.isProd,
+            sameSite: 'none',
+            secure: true,
             maxAge: 1000 * 60 * 60 * 24 * 30,
             path: '/auth/refresh',
         });
@@ -87,8 +87,8 @@ export class AuthController {
 
             res.cookie(this.cookieName, refreshToken, {
                 httpOnly: true,
-                sameSite: 'lax',
-                secure: this.isProd,
+                sameSite: 'none',
+                secure: true,
                 maxAge: 1000 * 60 * 60 * 24 * 30,
                 path: '/auth/refresh',
             });

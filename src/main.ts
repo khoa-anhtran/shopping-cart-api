@@ -6,8 +6,8 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const origin = process.env.CORS_ORIGIN ?? 'http://localhost:5173';
-  
+  const origin = process.env.CORS_ORIGIN;
+
   app.enableCors({ origin, credentials: true });
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
