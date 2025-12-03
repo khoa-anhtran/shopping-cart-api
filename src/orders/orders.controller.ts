@@ -1,7 +1,8 @@
-import { Controller, Get, Param, ParseIntPipe, Post, Req, Res, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Req, Res, UseGuards } from "@nestjs/common";
 import { OrdersService } from "./orders.service";
 import type { MyRequest } from "src/type";
 import { MainGuard } from "src/auth-strategy/main.guard";
+import { OrderDto } from "./dto/order.dto";
 
 @Controller('api/orders')
 export class OrdersController {
@@ -18,10 +19,10 @@ export class OrdersController {
 
     @Post('')
     @UseGuards(MainGuard)
-    async placeOrder(@Req() req: MyRequest) {
+    async placeOrder(@Req() req: MyRequest, @Body() data: OrderDto) {
         const userId = req.user.userId
-        const orders = await this.service.findAll(userId);
+        const order = await this.service.create(userId, data);
 
-        return { orders };
+        return { order };
     }
 }

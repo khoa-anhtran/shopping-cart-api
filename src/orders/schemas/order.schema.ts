@@ -19,9 +19,10 @@ export class Order {
             method: { type: String, required: true },
             isPaid: { type: Boolean, required: true, default: false },
         },
+        _id: false
     })
     paymentInfo!: {
-        type: string,
+        method: string,
         isPaid: boolean
     };
 
