@@ -8,6 +8,7 @@ import { AccountsModule } from './accounts/accounts.module';
 import { CartsModule } from './carts/carts.module';
 import { CommentsModule } from './comments/comments.module';
 import { UploadModule } from './cloudinary/upload.module';
+import { AddressModule } from './address/address.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { UploadModule } from './cloudinary/upload.module';
     AccountsModule,
     CartsModule,
     CommentsModule,
-    UploadModule
+    UploadModule,
+    AddressModule
   ],
 })
 
