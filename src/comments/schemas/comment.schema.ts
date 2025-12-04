@@ -6,7 +6,8 @@ import { User } from "src/users/user.schema";
 
 @Schema({ timestamps: true })
 export class Comment {
-    _id: string;
+    _id?: string;
+    id: string;
 
     @Prop({ required: true, ref: User.name, type: MSchema.Types.ObjectId })
     user!: Types.ObjectId | User;
