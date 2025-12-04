@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseGuards, Res, Req } from '@nestjs/common';
 import { CartsService } from './carts.service';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 import { Types } from 'mongoose';
 import { MainGuard } from 'src/auth-strategy/main.guard';
+import type { MyRequest } from 'src/type';
 
 @Controller('/api/carts')
 export class CartsController {
@@ -14,39 +15,27 @@ export class CartsController {
     return this.cartsService.create(createCartDto);
   }
 
-  @Get()
-  async findAll() {
-    const data = await this.cartsService.findAll();
-    return data
-  }
-
   @UseGuards(MainGuard)
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
-    const userId = new Types.ObjectId(id)
+  @Get('')
+  async findOne(@Req() req: MyRequest) {
+    const userId = req.user.userId
 
     const data = await this.cartsService.findOne(userId);
 
     if (!data)
       return {}
 
-    const res = Object.fromEntries(data.items.map(item => {
-      const { addedAt, itemId, quantity } = item
-
-      return [itemId, { quantity, addedAt }]
-    }))
-
-    return res
+    return data
   }
 
   @UseGuards(MainGuard)
-  @Put(':id')
-  async update(@Param('id') id: string, @Body() updateCartDto: UpdateCartDto) {
-    const userId = new Types.ObjectId(id)
+  @Put('')
+  async update(@Req() req: MyRequest, @Body() updateCartDto: UpdateCartDto) {
+    const userId = req.user.userId
     const { items } = updateCartDto
 
-    const res = await this.cartsService.update(userId, items);
+    const data = await this.cartsService.update(userId, items);
 
-    return res
+    return data
   }
 }

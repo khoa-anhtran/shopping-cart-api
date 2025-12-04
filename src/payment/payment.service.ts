@@ -14,7 +14,7 @@ export class PaymentService {
         this.payos = new PayOS({
             clientId: cfg.get<string>('PAYOS_CLIENT_ID'),
             apiKey: cfg.get<string>('PAYOS_API_KEY'),
-            checksumKey: cfg.get<string>('PAYOS_CHECKSUM_KEY')
+        checksumKey: cfg.get<string>('PAYOS_CHECKSUM_KEY')
         })
     }
 

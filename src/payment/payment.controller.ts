@@ -2,17 +2,19 @@ import { Body, Controller, Get, Param, ParseIntPipe, Post, Req, Res, UseGuards }
 import { PaymentService } from "./payment.service";
 import type { MyRequest } from "src/type";
 import { MainGuard } from "src/auth-strategy/main.guard";
+import { UsersService } from "src/users/users.service";
 
 @Controller('api/payment')
 export class PaymentController {
-    constructor(private service: PaymentService) { }
+    constructor(private service: PaymentService, private usersService: UsersService) { }
 
-    @Get('')
+    @Get("/shipping-address")
     @UseGuards(MainGuard)
-    async getOrders(@Req() req: MyRequest) {
+    async getShippingAddress(@Req() req: MyRequest) {
         const userId = req.user.userId
-        const orders = await this.service.findAll(userId);
 
-        return { orders };
+        const shippingAddress = await this.usersService.getShippingAddress(userId)
+
+        return { shippingAddress }
     }
 }

@@ -41,6 +41,15 @@ export class UsersService {
     }
   }
 
+  async getShippingAddress(userId: string) {
+    const user = await this.model.findById(userId)
+
+    if (!user)
+      throw new Error("This user is not existed")
+
+    return user.shippingAddress
+  }
+
   async saveShippingAddress(userId: string, shippingAddress: ShippingAddress) {
     try {
       await this.model.findOneAndUpdate({ _id: userId }, { shippingAddress }, {

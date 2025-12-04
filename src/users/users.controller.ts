@@ -1,7 +1,9 @@
 // upload.controller.ts
-import { Body, Controller, Param, Post, Req } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Req, UseGuards } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { UpdateUserDto } from "src/comments/dto/update-user.dto";
+import type { MyRequest } from "src/type";
+import { MainGuard } from "src/auth-strategy/main.guard";
 
 @Controller("/api/users")
 export class UsersController {

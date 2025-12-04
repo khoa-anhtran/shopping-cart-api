@@ -11,6 +11,7 @@ import { UploadModule } from './cloudinary/upload.module';
 import { AddressModule } from './address/address.module';
 import { OrderModule } from './orders/orders.module';
 import { PaymentModule } from './payment/payment.module';
+import { AuthStrategyModule } from './auth-strategy/auth-stategy.module';
 
 @Module({
   imports: [

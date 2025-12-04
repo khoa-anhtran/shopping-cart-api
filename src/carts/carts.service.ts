@@ -21,15 +21,18 @@ export class CartsService {
     return this.model.find().lean()
   }
 
-  async findOne(userId: Types.ObjectId) {
-    const doc = await this.model.findOne({ userId }).exec()
+  async findOne(userId: string) {
+    const typedUserId = new Types.ObjectId(userId)
+
+    const doc = await this.model.findOne({ userId: typedUserId }).exec()
 
     return doc ? this.toCartDto(doc) : undefined
   }
 
-  async update(userId: Types.ObjectId, items: CartItemDto[]) {
+  async update(userId: string, items: CartItemDto[]) {
     try {
-      await this.model.findOneAndUpdate({ userId }, { items, userId }, {
+      const typedUserId = new Types.ObjectId(userId)
+      await this.model.findOneAndUpdate({ userId: typedUserId }, { items }, {
         overwrite: true,
         runValidators: true,
       }).exec()
