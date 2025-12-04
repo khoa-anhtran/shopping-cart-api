@@ -1,4 +1,4 @@
-import { Controller, Get, Param, ParseIntPipe, Req, Res } from "@nestjs/common";
+import { Controller, Get, Param, ParseIntPipe, Query, Req, Res } from "@nestjs/common";
 import { ProductsService } from "./products.service";
 
 @Controller('api/products')
@@ -6,10 +6,10 @@ export class ProductsController {
     constructor(private service: ProductsService) { }
 
     @Get('')
-    async getProducts() {
-        const products = await this.service.findAll();
+    async getProducts(@Query("after") after?: string, @Query("limit") limit?: number) {
+        const productsConnection = await this.service.findAll(after, limit);
 
-        return { products };
+        return productsConnection;
     }
 
     @Get(':id')
