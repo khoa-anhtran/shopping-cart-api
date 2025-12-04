@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { AccountProvider, User, UserDocument } from './user.schema';
 import { UpdateUserDto } from 'src/comments/dto/update-user.dto';
+import { ShippingAddress } from 'src/orders/schemas/shipping-address.schema';
 
 @Injectable()
 export class UsersService {
@@ -25,6 +26,24 @@ export class UsersService {
       const { name, avatar } = data
 
       await this.model.findOneAndUpdate({ _id: userId }, { name, avatar }, {
+        runValidators: true,
+      }).exec()
+
+      return {
+        isSuccess: true
+      }
+    }
+    catch (err) {
+      return {
+        isSuccess: false,
+        message: new Error(err).message
+      }
+    }
+  }
+
+  async saveShippingAddress(userId: string, shippingAddress: ShippingAddress) {
+    try {
+      await this.model.findOneAndUpdate({ _id: userId }, { shippingAddress }, {
         runValidators: true,
       }).exec()
 

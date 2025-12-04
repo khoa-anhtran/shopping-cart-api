@@ -7,7 +7,7 @@ export class OrderDto {
     shippingAddress!: ShippingAddress;
 
     @IsNotEmpty()
-    paymentInfo!: {
+    paymentStatus!: {
         method: string,
         isPaid: boolean
     };

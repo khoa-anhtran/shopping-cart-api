@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { ShippingAddress, ShippingAddressSchema } from 'src/orders/schemas/shipping-address.schema';
 
 @Schema({ timestamps: true })
 export class User {
@@ -19,6 +20,9 @@ export class User {
 
   @Prop({ trim: true })
   providerId?: string;
+
+  @Prop({ type: ShippingAddressSchema })
+  shippingAddress?: ShippingAddress
 }
 
 export enum AccountProvider {
