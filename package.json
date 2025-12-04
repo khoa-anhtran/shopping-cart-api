@@ -29,6 +29,7 @@
     "@nestjs/mongoose": "^11.0.3",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.0.1",
+    "@payos/node": "^2.0.3",
     "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.5",
     "@types/passport-azure-ad": "^4.3.6",

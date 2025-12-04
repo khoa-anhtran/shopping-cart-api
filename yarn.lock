@@ -1099,6 +1099,11 @@
   dependencies:
     "@noble/hashes" "^1.1.5"
 
+"@payos/node@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@payos/node/-/node-2.0.3.tgz#ba99ba798ab2922286d4efa92072b742041a30cd"
+  integrity sha512-VDQlpLIo22mfOyFvizBSxJO8tkwxnG8J7WryQMorFNSUi9T7QrUQRBIusdzPsGCG5/DxxURMGHJ8SPNFS4puPg==
+
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
