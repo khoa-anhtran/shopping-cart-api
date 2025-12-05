@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
 import { Schema as MSchema } from 'mongoose';
-import { ProductCategory } from '../product-category.schema';
+import { ProductCategory } from './product-category.schema';
 
 @Schema({ timestamps: true })
 export class Product {

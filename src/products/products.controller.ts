@@ -12,10 +12,18 @@ export class ProductsController {
         return productsConnection;
     }
 
+    @Get('/categories')
+    async getCategories() {
+        const categories = await this.service.getProductCategories()
+
+        return categories;
+    }
+
     @Get(':id')
     async getProduct(@Param('id', ParseIntPipe) id: number) {
         const product = await this.service.findByProductId(id);
 
         return { [id]: product };
     }
+
 }
