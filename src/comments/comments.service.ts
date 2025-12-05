@@ -36,12 +36,12 @@ export class CommentsService {
 
     // if we have a cursor, only get items after that cursor
     if (after) {
-      filter._id = { $gt: new Types.ObjectId(after) }; // ascending by _id
+      filter._id = { $lt: new Types.ObjectId(after) }; // ascending by _id
     }
 
     const docs = await this.model
       .find(filter)
-      .sort({ _id: 1 })         // oldest → newest
+      .sort({ _id: -1 })         // oldest → newest
       .limit(limit + 1)         // fetch one extra to detect next page
       .populate({ path: 'user', select: 'name avatar' })
       .populate({ path: 'replies', select: '_id' })
