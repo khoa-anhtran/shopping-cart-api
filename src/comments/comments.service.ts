@@ -20,7 +20,7 @@ export class CommentsService {
     return {
       id: comment._id,
       text: comment.text,
-      images: comment.images,
+      media: comment.media,
       depth: comment.depth,
       user: comment.user,
       parentId: comment.parentId,
@@ -54,7 +54,7 @@ export class CommentsService {
       const node: Comment = {
         id: doc._id.toString(),
         text: doc.text,
-        images: doc.images,
+        media: doc.media,
         depth: doc.depth,
         user: doc.user,
         createdAt: doc.createdAt,

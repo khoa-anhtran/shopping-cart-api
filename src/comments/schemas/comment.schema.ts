@@ -18,8 +18,8 @@ export class Comment {
     @Prop()
     text: string;
 
-    @Prop({ type: [{ publicId: String, url: String }], default: [] })
-    images: { publicId: string; url: string }[];
+    @Prop({ type: [{ publicId: String, url: String, mediaType: String }], default: [] })
+    media: { publicId: string; url: string; mediaType: string }[];
 
     @Prop({ type: MSchema.Types.ObjectId, ref: Comment.name, default: null })
     parentId: Types.ObjectId | null | Comment; // null for top-level

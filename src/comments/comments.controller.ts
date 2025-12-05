@@ -13,6 +13,9 @@ export class CommentsController {
   @Post(':product_id')
   create(@Req() req: MyRequest, @Param('product_id') productId: string, @Body() createCommentDto: CreateCommentDto) {
     const userId = req.user.userId ?? ""
+
+    console.log(createCommentDto)
+
     return this.commentsService.create(createCommentDto, userId, productId);
   }
 
