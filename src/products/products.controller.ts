@@ -6,8 +6,8 @@ export class ProductsController {
     constructor(private service: ProductsService) { }
 
     @Get('')
-    async getProducts(@Query("after") after?: string, @Query("limit") limit?: number) {
-        const productsConnection = await this.service.findAll(after, limit);
+    async getProducts(@Query("after") after?: string, @Query("limit") limit?: number, @Query("categoryId") categoryId?: string) {
+        const productsConnection = await this.service.findAll(after, limit, categoryId);
 
         return productsConnection;
     }

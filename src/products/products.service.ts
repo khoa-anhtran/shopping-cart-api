@@ -16,13 +16,17 @@ export class ProductsService {
         return this.model.findOne({ id }).lean();
     }
 
-    async findAll(after?: string, limit = 1000) {
+    async findAll(after?: string, limit = 12, categoryId?: string) {
 
         const filter: any = {};
 
         // if we have a cursor, only get items after that cursor
         if (after) {
             filter._id = { $gt: new Types.ObjectId(after) }; // ascending by _id
+        }
+
+        if (categoryId) {
+            filter.categoryId = categoryId
         }
 
         const docs = await this.model
