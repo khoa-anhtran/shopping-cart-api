@@ -5,6 +5,7 @@ import { ProductCategory } from './product-category.schema';
 
 @Schema({ timestamps: true })
 export class Product {
+    _id: Types.ObjectId
 
     @Prop({ required: true, unique: true, lowercase: true, trim: true, index: true })
     title!: string;

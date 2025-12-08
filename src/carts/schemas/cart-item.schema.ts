@@ -6,7 +6,7 @@ import { Product } from "src/products/schemas/product.schema";
 @Schema({ _id: false })
 export class CartItem {
     @Prop({ required: true, ref: Product.name, index: true, type: MSchema.Types.ObjectId })
-    itemId!: Types.ObjectId;
+    itemId!: Types.ObjectId | Product;
 
     @Prop({ required: true })
     quantity!: number;

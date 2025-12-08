@@ -7,6 +7,7 @@ import { Model, Types } from 'mongoose';
 import { CartItem } from './schemas/cart-item.schema';
 import { CartItemDto } from './dto/cart-item.dto';
 import { CartDto } from './dto/cart.dto';
+import { Product } from 'src/products/schemas/product.schema';
 
 @Injectable()
 export class CartsService {
@@ -24,8 +25,14 @@ export class CartsService {
   async findOne(userId: string) {
     const typedUserId = new Types.ObjectId(userId)
 
-    const doc = await this.model.findOne({ userId: typedUserId }).exec()
-
+    const doc = await this.model
+      .findOne({ userId: typedUserId })
+      .populate({
+        path: 'items', populate: {
+          path: "itemId"
+        }
+      })
+      .exec()
     return doc ? this.toCartDto(doc) : undefined
   }
 
@@ -56,11 +63,19 @@ export class CartsService {
   toCartDto(doc: CartDocument): CartDto {
     return {
       userId: doc.userId.toString(),
-      items: doc.items.map(item => ({
-        itemId: item.itemId.toString(),
-        quantity: item.quantity,
-        addedAt: item.addedAt
-      }))
+      items: doc.items.map((item) => {
+        const product = item.itemId as Product
+
+        return {
+          quantity: item.quantity,
+          addedAt: item.addedAt,
+          category: product.categoryId.toString(),
+          id: product._id.toString(),
+          price: product.price,
+          title: product.title,
+          thumbnail: product.thumbnail
+        }
+      })
     }
   }
 }
