@@ -5,19 +5,30 @@ import { ProductCategory } from './product-category.schema';
 
 @Schema({ timestamps: true })
 export class Product {
-    _id: Types.ObjectId
+  _id: Types.ObjectId;
 
-    @Prop({ required: true, unique: true, lowercase: true, trim: true, index: true })
-    title!: string;
+  @Prop({
+    required: true,
+    unique: true,
+    lowercase: true,
+    trim: true,
+    index: true,
+  })
+  title!: string;
 
-    @Prop({ required: true, ref: ProductCategory.name, index: true, type: MSchema.Types.ObjectId })
-    categoryId!: Types.ObjectId | ProductCategory;
+  @Prop({
+    required: true,
+    ref: ProductCategory.name,
+    index: true,
+    type: MSchema.Types.ObjectId,
+  })
+  categoryId!: Types.ObjectId | ProductCategory;
 
-    @Prop({ required: true })
-    price!: number;
+  @Prop({ required: true })
+  price!: number;
 
-    @Prop({ required: true })
-    thumbnail!: string;
+  @Prop({ required: true })
+  thumbnail!: string;
 }
 
 export type ProductDocument = HydratedDocument<Product>;

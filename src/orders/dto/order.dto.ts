@@ -1,26 +1,26 @@
-import { IsArray, IsBoolean, IsInt, IsMongoId, IsNotEmpty } from "class-validator";
-import { ShippingAddress } from "../schemas/shipping-address.schema";
-import { CartItemDto } from "src/carts/dto/cart-item.dto";
+import { IsArray, IsBoolean, IsInt, IsNotEmpty } from 'class-validator';
+import { ShippingAddress } from '../schemas/shipping-address.schema';
+import { CartItemDto } from 'src/carts/dto/cart-item.dto';
 
 export class OrderDto {
-    @IsNotEmpty()
-    shippingAddress!: ShippingAddress;
+  @IsNotEmpty()
+  shippingAddress!: ShippingAddress;
 
-    @IsNotEmpty()
-    paymentStatus!: {
-        method: string,
-        isPaid: boolean
-    };
+  @IsNotEmpty()
+  paymentStatus!: {
+    method: string;
+    isPaid: boolean;
+  };
 
-    @IsNotEmpty()
-    @IsArray()
-    items!: CartItemDto[];
+  @IsNotEmpty()
+  @IsArray()
+  items!: CartItemDto[];
 
-    @IsNotEmpty()
-    @IsInt()
-    total!: number
+  @IsNotEmpty()
+  @IsInt()
+  total!: number;
 
-    @IsNotEmpty()
-    @IsBoolean()
-    isSaved!: boolean
+  @IsNotEmpty()
+  @IsBoolean()
+  isSaved!: boolean;
 }

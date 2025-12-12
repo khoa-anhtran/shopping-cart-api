@@ -1,10 +1,10 @@
-import { IsMongoId } from "class-validator";
+import { IsMongoId } from 'class-validator';
 
 export class ProductDto {
-    @IsMongoId()
-    id: string
-    title!: string;
-    category!: string;
-    price!: number;
-    thumbnail!: string;
+  @IsMongoId()
+  id: string;
+  title!: string;
+  category!: string;
+  price!: number;
+  thumbnail!: string;
 }

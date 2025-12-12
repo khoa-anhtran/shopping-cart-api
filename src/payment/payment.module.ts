@@ -7,12 +7,8 @@ import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from 'src/users/users.module';
 
 @Module({
-    imports: [
-        AuthStrategyModule,
-        ConfigModule,
-        UsersModule
-    ],
-    providers: [PaymentService],
-    controllers: [PaymentController],
+  imports: [AuthStrategyModule, ConfigModule, UsersModule],
+  providers: [PaymentService],
+  controllers: [PaymentController],
 })
-export class PaymentModule { }
+export class PaymentModule {}
